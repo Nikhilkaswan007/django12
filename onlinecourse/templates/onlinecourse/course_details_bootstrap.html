@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            <h1>{{ course.name }}</h1>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">About this course</h5>
+            <p class="card-text">{{ course.description }}</p>
+            <hr>
+            <h5>Lessons</h5>
+            <ul class="list-group mb-4">
+                {% for lesson in course.lesson_set.all %}
+                    <li class="list-group-item">{{ lesson.title }}</li>
+                {% endfor %}
+            </ul>
+            
+            <hr>
+
+            <h5 class="mt-4">Exam</h5>
+            <form action="{% url 'onlinecourse:submit' course.id %}" method="post">
+                {% csrf_token %}
+                {% for lesson in course.lesson_set.all %}
+                    {% for question in lesson.question_set.all %}
+                        <div class="card mt-3">
+                            <div class="card-header">
+                                {{ question.question_text }} ({{ question.grade }} point{{ question.grade|pluralize }})
+                            </div>
+                            <div class="card-body">
+                                {% for choice in question.choice_set.all %}
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="choice_{{ choice.id }}" id="choice_{{ choice.id }}" value="{{ choice.id }}">
+                                        <label class="form-check-label" for="choice_{{ choice.id }}">
+                                            {{ choice.choice_text }}
+                                        </label>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                <button type="submit" class="btn btn-primary mt-3">Submit Exam</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

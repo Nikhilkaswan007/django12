@@ -1,0 +1,33 @@
+.about-us-container {
+  padding: 40px;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+.about-us-title {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #4caf50;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.about-us-description {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.about-us-content {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  text-align: justify;
+}
